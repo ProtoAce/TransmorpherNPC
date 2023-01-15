@@ -79,7 +79,13 @@ namespace TransmorpherNPC.NPCs
             }
             else
             {
-                //TODO:set up transmorph
+                // If the 2nd button is pressed, open the inventory...
+                Main.playerInventory = true;
+                // remove the chat window...
+                Main.npcChatText = "";
+                // and start an instance of our UIState.
+                ModContent.GetInstance<TransmorpherNPC>().TransmorpherUserInterface.SetState(new UI.TransmorpherUI());
+                // Note that even though we remove the chat window, Main.LocalPlayer.talkNPC will still be set correctly and we are still technically chatting with the npc.
             }
         }
 
@@ -130,7 +136,7 @@ namespace TransmorpherNPC.NPCs
         public override void TownNPCAttackProj(ref int projType, ref int attackDelay)
         {
             projType = ProjectileID.PaladinsHammerFriendly;
-            attackDelay = 0;
+            attackDelay = 1;
         }
 
         public override void TownNPCAttackProjSpeed(ref float multiplier, ref float gravityCorrection, ref float randomOffset)
